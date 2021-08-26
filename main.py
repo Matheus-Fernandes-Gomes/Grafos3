@@ -1,7 +1,7 @@
 import os
 import timeit
 import numpy as np
-import algoritimo_construtivo
+import algoritimos
 #verifica e entra no arquivo do grafo
 verificador = False
 arquivo = ''
@@ -23,26 +23,11 @@ while (cond):
         cond=False 
 
 #seleção do algoritimo construtivo a ser executado
-print('\tEscolha o algoritimo construtivo a ser executado:\nSendo:')
+print('Os algoritimos seram executados:\n')
 cond=True
-while (cond):
 
-    selecao = input('\t1 Algoritimo construtivo \n\t2 Algoritimo de refinamento\n-1 Para sair ')
-    selecao = int(selecao)
-    if ((selecao==1)or(selecao==2)or(selecao==-1)):
-        if selecao == 1:       
-            algoritimo_construtivo.algoritimo_construtivo(arquivo)           
-            print("retorno")
-        elif selecao ==2:
-            print("bla")
 
-        else:
-            break;
-            cond=False
-        #Limpa a tela
-
-        #os.system('cls') or None
-    else:
-        print('\n selecao invalida!')
+selecao = input('\tAtenção o algoritimo só se incerrara com o final do tempo\n\tPressione enter para começar <-|')
+algoritimos.algoritimos(arquivo,tempo)
 
 
