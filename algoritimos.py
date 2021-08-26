@@ -17,14 +17,14 @@ class algoritimos:
 
         self.n_vertices=0
         inicio_tempo=time.time()
-        self.lista,self.resu,matriz = self.constroi(arquivo)
+        self.lista,resu = self.constroi(arquivo)
         print("Algoritimo construtivo:")
-        self.imprimi(self.lista,self.resu)
+        self.imprimi(self.lista,resu)
         #self.menor_no_vertice(arquivo,3)
         #2opt
         print("Algoritimo 2-OPT")
-        
-        caminho,menor_tamanho=self.refinamento_2opt((inicio_tempo+tempo),self.lista,matriz)
+        matriz=self.cria_matriz(arquivo)
+        caminho,menor_tamanho=self.refinamento_2opt((inicio_tempo+tempo),self.lista,matriz,resu)
         self.imprimi(caminho,menor_tamanho)
 
     def imprimi(self,Lista,resu):
@@ -56,11 +56,13 @@ class algoritimos:
             #print("teste")
             #print(m_destino,menor)
             destino1=m_destino
-            #resu=resu+menor
+            
+            if(len(self.lista)!=(self.n_vertices)):
+                resu=resu+menor
             #print("res",resu) 
         #print("***",resu)
-        matriz=self.cria_matriz(arquivo)
-        resu=self.custo_percuso(self.lista, matriz)
+        #matriz=self.cria_matriz(arquivo)
+        #resu=self.custo_percuso(self.lista, matriz)
         '''
         i=0
         for i in range(5):
@@ -82,7 +84,7 @@ class algoritimos:
                 morigem,mdestino,menor=self.menor_no_vertice(arquivo,origem)
                 resu=resu+menor
                 lista.append(morigem)'''
-        return(self.lista,resu,matriz)
+        return(self.lista,resu)
     
 
     def menor(self,arquivo):
@@ -203,14 +205,13 @@ class algoritimos:
         return matriz
 
 
-    def refinamento_2opt(self,tempo, caminho, matriz):
+    def refinamento_2opt(self,tempo, caminho, matriz,resu):
         
         aux = []
         aux2 = 0
         tentativa = []
         fim=0
-        menor_tamanho=self.custo_percuso(caminho, matriz)
-        
+        menor_tamanho=resu
         while(tempo>=fim):
             vertice = randint(1, len(caminho) - 2)
             vertice2 = randint(1, len(caminho) - 2)
